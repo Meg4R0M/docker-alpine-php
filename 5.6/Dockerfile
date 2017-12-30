@@ -6,7 +6,7 @@ LABEL maintainer="Florian Durano <psykoterro@gmail.com>" \
     org.label-schema.vendor="meg4r0m" \
     org.label-schema.name="php-alpine" \
     org.label-schema.description="small php image based on alpine" \
-    org.label-schema.vcs-url="https://github.com/psykoterro/docker-php-alpine"
+    org.label-schema.vcs-url="https://github.com/psykoterro/docker-alpine-php"
 
 # Environments
 ENV TIMEZONE Europe/Paris
