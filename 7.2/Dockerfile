@@ -1,4 +1,4 @@
-FROM alpine:3.7
+FROM alpine:3.8
 
 LABEL php.version=7.2
 LABEL maintainer="Florian Durano <psykoterro@gmail.com>" \
@@ -14,42 +14,39 @@ ADD https://php.codecasts.rocks/php-alpine.rsa.pub /etc/apk/keys/php-alpine.rsa.
 ENV TIMEZONE Europe/Paris
 
 RUN echo "@edge-main http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories \
-    && echo "@edge-community http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories \
-    && echo "@cast http://php.codecasts.rocks/v3.7/php-7.2" >> /etc/apk/repositories
+    && echo "@edge-community http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories
 
 RUN apk add --update tzdata && \
 	cp /usr/share/zoneinfo/${TIMEZONE} /etc/localtime && \
 	echo "${TIMEZONE}" > /etc/timezone \
-    && wget http://dl-4.alpinelinux.org/alpine/v3.6/main/x86_64/imagemagick-7.0.5.10-r0.apk \
-    && apk add imagemagick-7.0.5.10-r0.apk \
     && apk --update add ca-certificates \
     && apk add -U \
     tini \
-    php7@cast \
-    php7-mysqlnd@cast \
-    php7-pdo_mysql@cast \
-    php7-json@cast \
-    php7-xsl@cast \
-    php7-intl@cast \
-    php7-mcrypt@edge-community \
-    php7-curl@cast \
-    php7-imagick@cast \
-    php7-gd@cast \
-    && wget http://php.codecasts.rocks/v3.7/php-7.2/x86_64/php7-xmlrpc-7.2.0-r3.apk \
-    && apk add php7-xmlrpc-7.2.0-r3.apk \
-    && apk add -U php7-memcached@cast \
-    php7-xdebug@edge-community \
-    php7-mbstring@cast \
-    php7-phar@cast \
-    php7-zlib@cast \
-    && wget http://php.codecasts.rocks/v3.7/php-7.2/x86_64/php7-openssl-7.2.0-r3.apk \
-    && apk add php7-openssl-7.2.0-r3.apk \
-    && ln -s /usr/bin/php7 /usr/bin/php \
+    imagemagick \
+    php7 \
+    php7-mysqlnd \
+    php7-pdo_mysql \
+    php7-json \
+    php7-xsl \
+    php7-intl \
+    php7-mcrypt \
+    php7-curl \
+    php7-imagick \
+    php7-gd \
+    php7-xmlrpc \
+    php7-memcached \
+    php7-xdebug \
+    php7-mbstring \
+    php7-phar \
+    php7-zlib \
+    php7-openssl \
     && rm -rf /var/cache/apk/*
 
 # PHP config
 # -----------------------------------------------------------------------------
 # Custom PHP variables
 COPY custom_vars.ini /etc/php7.2/conf.d/custom_vars.ini
+
+ENV PHP_VERSION 7.2.8
 
 ENTRYPOINT ["/bin/sh"]
