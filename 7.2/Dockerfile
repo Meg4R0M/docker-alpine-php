@@ -53,19 +53,19 @@ RUN apk add --update tzdata && \
 
 # Set timezone
 RUN ln -snf /usr/share/zoneinfo/${TIMEZONE} /etc/localtime && echo ${TIMEZONE} > /etc/timezone
-RUN printf '[PHP]\ndate.timezone = "%s"\n', ${TIMEZONE} > /etc/php7.2/conf.d/tzone.ini
+RUN printf '[PHP]\ndate.timezone = "%s"\n', ${TIMEZONE} > /etc/php7/conf.d/tzone.ini
 
 # PHP config
 # -----------------------------------------------------------------------------
 # Custom PHP variables
-COPY custom_vars.ini /etc/php7.2/conf.d/custom_vars.ini
+COPY custom_vars.ini /etc/php7/conf.d/custom_vars.ini
 
-RUN echo "xdebug.remote_enable=1" >> /etc/php7.2/conf.d/docker-php-ext-xdebug.ini
-RUN echo "xdebug.remote_connect_back=1" >> /etc/php7.2/conf.d/docker-php-ext-xdebug.ini
-RUN echo "xdebug.idekey=\"PHPSTORM\"" >> /etc/php7.2/conf.d/docker-php-ext-xdebug.ini
-RUN echo "xdebug.remote_port=9001" >> /etc/php7.2/conf.d/docker-php-ext-xdebug.ini
+RUN echo "xdebug.remote_enable=1" >> /etc/php7/conf.d/docker-php-ext-xdebug.ini
+RUN echo "xdebug.remote_connect_back=1" >> /etc/php7/conf.d/docker-php-ext-xdebug.ini
+RUN echo "xdebug.idekey=\"PHPSTORM\"" >> /etc/php7/conf.d/docker-php-ext-xdebug.ini
+RUN echo "xdebug.remote_port=9001" >> /etc/php7/conf.d/docker-php-ext-xdebug.ini
 
-ENV PHP_VERSION 7.2.12
+ENV PHP_VERSION 7.2.10
 
 # START WITH BASH.
 CMD ["/bin/bash"]
