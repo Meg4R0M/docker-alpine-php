@@ -15,7 +15,7 @@ ENV TIMEZONE Europe/Paris
 
 RUN echo "@edge-main http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories \
     && echo "@edge-community http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories \
-    && echo "@cast http://php.codecasts.rocks/7.1" >> /etc/apk/repositories
+    && echo "@cast http://php.codecasts.rocks/v3.7/php-7.1" >> /etc/apk/repositories
 
 
 RUN apk add --update tzdata && \

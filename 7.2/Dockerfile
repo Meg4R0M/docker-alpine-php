@@ -51,6 +51,8 @@ RUN apk add --update tzdata && \
     php7-sodium \
     php7-ctype \
     php7-tokenizer \
+    php7-simplexml \
+    php7-iconv \
     && rm -rf /var/cache/apk/*
 
 # Set timezone
